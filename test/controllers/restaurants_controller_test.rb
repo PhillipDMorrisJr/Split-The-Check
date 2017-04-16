@@ -28,20 +28,10 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get edit" do
-    get edit_restaurant_url(@restaurant)
-    assert_response :success
-  end
-
   test "should update restaurant" do
     patch restaurant_url(@restaurant), params: { restaurant: { down_vote: @restaurant.down_vote, location: @restaurant.location, name: @restaurant.name, up_vote: @restaurant.up_vote } }
     assert_redirected_to restaurant_url(@restaurant)
   end
-
-  test "should destroy restaurant" do
-    assert_difference('Restaurant.count', -1) do
-      delete restaurant_url(@restaurant)
-    end
 
     assert_redirected_to restaurants_url
   end

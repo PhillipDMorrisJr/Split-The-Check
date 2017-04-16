@@ -21,6 +21,8 @@
         <td><%= restaurant.up_vote %></td>
         <td><%= restaurant.down_vote %></td>
         <td><%= link_to 'Show', restaurant %></td>
+	<td><%= link_to 'Up Vote', restaurant, method: :upvote %>
+	</td><td><%= link_to 'Down Vote', restaurant, method: :downvote %></td>
       </tr>
     <% end %>
   </tbody>
