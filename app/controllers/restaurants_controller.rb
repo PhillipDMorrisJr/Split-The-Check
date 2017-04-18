@@ -5,6 +5,9 @@ class RestaurantsController < ApplicationController
   # GET /restaurants.json
   def index
     @restaurants = Restaurant.all
+    if params[:search]
+      @restaurants = Restaurant.search(params[:search])
+    end
   end
 
   # GET /restaurants/1
