@@ -28,4 +28,8 @@
 
 <br>
 
+<% if @restaurants.blank? %>
+      <h4> There are no restaurants that have that name or location <%= params[:search] %>.</h4>
+      <% end %>
+
 <%= link_to 'New Restaurant', new_restaurant_path %>
