@@ -1,6 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Restaurants</h1>
+<h1><table>
+<tr> Restaurants </tr>
+<tr><%= button_to 'New Restaurant', new_restaurant_path %></tr>
+</table>
+</h1>
 
 <table>
   <thead>
@@ -12,6 +16,10 @@
       <th colspan="3"></th>
     </tr>
   </thead>
+<% if @restaurants.blank? %>
+      <h4> There are no restaurants that have that name or location <%= params[:search] %>.</h4>
+      <% end %>
+
 
   <tbody>
     <% @restaurants.each do |restaurant| %>
@@ -21,15 +29,10 @@
         <td><%= restaurant.up_vote %></td>
         <td><%= restaurant.down_vote %></td>
         <td><%= link_to 'Show', restaurant %></td>
+	<td><%= button_to 'Up Vote', upvote_restaurant_path(restaurant), method: 'patch' %></td>
+	<td><%= button_to 'Down Vote', downvote_restaurant_path(restaurant), method: 'patch'%></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<% if @restaurants.blank? %>
-      <h4> There are no restaurants that have that name or location <%= params[:search] %>.</h4>
-      <% end %>
-
-<%= link_to 'New Restaurant', new_restaurant_path %>

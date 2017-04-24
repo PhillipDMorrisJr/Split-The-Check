@@ -1,5 +1,5 @@
 class RestaurantsController < ApplicationController
-  before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
+  before_action :set_restaurant, only: [:show, :upvote, :downvote]
 
   # GET /restaurants
   # GET /restaurants.json
@@ -38,6 +38,20 @@ class RestaurantsController < ApplicationController
         format.json { render json: @restaurant.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  
+  def upvote
+    @restaurant.up_vote = @restaurant.up_vote + 1
+    @restaurant.save!
+    redirect_to restaurants_path
+  end
+
+  
+  def downvote
+    @restaurant.down_vote = @restaurant.down_vote - 1
+    @restaurant.save!
+    redirect_to restaurants_path
   end
 
   # PATCH/PUT /restaurants/1
