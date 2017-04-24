@@ -1,5 +1,5 @@
 class RestaurantsController < ApplicationController
-  before_action :set_restaurant, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
+  before_action :set_restaurant, only: [:show, :upvote, :downvote]
 
   # GET /restaurants
   # GET /restaurants.json
@@ -37,20 +37,18 @@ class RestaurantsController < ApplicationController
     end
   end
 
-  # POST /restaurants
-  # POST /restaurants.json
+  
   def upvote
-   respond_to do |format|
     @restaurant.up_vote = @restaurant.up_vote + 1
-   end
+    @restaurant.save!
+    redirect_to restaurants_path
   end
 
-  # POST /restaurants
-  # POST /restaurants.json
+  
   def downvote
-   respond_to do |format|
-    @restaurant.down_vote = @restaurant.up_vote - 1
-   end
+    @restaurant.down_vote = @restaurant.down_vote - 1
+    @restaurant.save!
+    redirect_to restaurants_path
   end
 
   # PATCH/PUT /restaurants/1

@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Restaurants</h1>
-
+<%= link_to 'New Restaurant', new_restaurant_path %>
+<br>
 <table>
   <thead>
     <tr>
@@ -21,13 +22,13 @@
         <td><%= restaurant.up_vote %></td>
         <td><%= restaurant.down_vote %></td>
         <td><%= link_to 'Show', restaurant %></td>
-	<td><%= link_to 'Up Vote', restaurant, method: :upvote %>
-	</td><td><%= link_to 'Down Vote', restaurant, method: :downvote %></td>
+	<td><%= button_to 'Up Vote', upvote_restaurant_path(restaurant), method: 'patch' %></td>
+	<td><%= button_to 'Down Vote', downvote_restaurant_path(restaurant), method: 'patch'%></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
 
-<%= link_to 'New Restaurant', new_restaurant_path %>
+
+
