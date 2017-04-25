@@ -44,14 +44,14 @@ class RestaurantsController < ApplicationController
   def upvote
     @restaurant.up_vote = @restaurant.up_vote + 1
     @restaurant.save!
-    redirect_to restaurants_path
+    redirect_back(fallback_location: restaurants_path)
   end
 
   
   def downvote
     @restaurant.down_vote = @restaurant.down_vote - 1
     @restaurant.save!
-    redirect_to restaurants_path
+    redirect_back(fallback_location: restaurants_path)
   end
 
   # PATCH/PUT /restaurants/1
