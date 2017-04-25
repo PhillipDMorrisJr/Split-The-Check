@@ -44,14 +44,18 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 test "should search restaurant by name" do 
-    get restaurant_url , {search: "Ryans"}
-    assert_equals 1, assigns[:restaurants.count]
+    get restaurants_url , {search: "Ryans"}
+
+
+    assert_equal 1, assigns[:restaurants]
     assert_redirected_to restaurant_url(@restaurant)
   end
 
   test "should search restaurant by location" do
-    get restaurant_url , {search: "Douglasville"}
-    assert_equals 2, assigns[:restaurants.count]
+    get restaurants_url , {search: "Douglasville"}
+   
+
+    assert_equal 2, assigns[:restaurants]
     assert_redirected_to restaurant_url(@restaurant)
   end
   
