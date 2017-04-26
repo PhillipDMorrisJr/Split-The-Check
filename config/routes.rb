@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :restaurants do
    get 'show' => 'restaurants#show'
    member do
