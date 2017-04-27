@@ -22,6 +22,7 @@
 
 
   <tbody>
+  <% if user_signed_in? %>
     <% @restaurants.each do |restaurant| %>
       <tr>
         <td><%= restaurant.name %></td>
@@ -32,6 +33,17 @@
 	<td><%= button_to 'Up Vote', upvote_restaurant_path(restaurant), method: 'patch' %></td>
 	<td><%= button_to 'Down Vote', downvote_restaurant_path(restaurant), method: 'patch'%></td>
       </tr>
+    <% end %>
+  <%else %>
+<% @restaurants.each do |restaurant| %>
+      <tr>
+        <td><%= restaurant.name %></td>
+        <td><%= restaurant.location %></td>
+        <td><%= link_to 'Show', restaurant %></td>
+      </tr>
+    <% end %>
+
+
     <% end %>
   </tbody>
 </table>
