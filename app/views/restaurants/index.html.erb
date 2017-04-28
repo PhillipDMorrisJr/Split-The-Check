@@ -2,7 +2,7 @@
 
 <h1><table>
 <tr> Restaurants </tr>
-<tr><%= button_to 'New Restaurant', new_restaurant_path %></tr>
+
 </table>
 </h1>
 
@@ -16,6 +16,7 @@
       <th colspan="3"></th>
     </tr>
   </thead>
+  <tr><%= link_to 'New Restaurant', new_restaurant_path %></tr>
 <% if @restaurants.blank? %>
       <h4> There are no restaurants that have that name or location <%= params[:search] %>.</h4>
       <% end %>
