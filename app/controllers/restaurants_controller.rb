@@ -1,5 +1,9 @@
 class RestaurantsController < ApplicationController
-  before_action :set_restaurant, only: [:show, :upvote, :downvote]
+    before_action :authenticate_user!, only: [:upvote, :downvote] 
+    before_action :set_restaurant, only: [:show]
+
+   
+  
 
   # GET /restaurants
   # GET /restaurants.json
