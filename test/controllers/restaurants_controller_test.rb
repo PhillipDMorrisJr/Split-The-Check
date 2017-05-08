@@ -55,5 +55,14 @@ test "should search restaurant by name" do
     
     assert_response :success 
   end
+
+  test "user should comment on restaurant" do 
+
+    @user = user.email
+    @comment = comment.create(:user, "This is a test comment.")
+    @comment.save
+    assert_redirected_to restaurant_path(@restaurant)
+    
+  end
   
 end
