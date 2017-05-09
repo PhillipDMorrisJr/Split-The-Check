@@ -13,12 +13,13 @@ setup do
 
   end
 
-
-
 #test "user should comment on restaurant" do
 
-  	#sign_in users(:one)
-  	#post :create, comment: {body: @comment.body, user: @comment.user }, restaurant_id: @restaurant.id
-  	#assert_redirected_to restaurant_path(@restaurant)
+    #sign_in users(:one)
+    #post :create, comment: {body: @comment.body, user: @comment.user }, restaurant_id: @restaurant.id
+    #assert_redirected_to restaurant_path(@restaurant)
+
   #end
+
+
 end

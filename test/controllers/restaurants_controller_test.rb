@@ -35,7 +35,7 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
    patch upvote_restaurant_path(@restaurant)
    @restaurant.reload
    assert_equal initial_upvote_value+1, @restaurant.up_vote
-   assert_redirected_to restaurants_path
+   assert_redirected_to new_user_session_url
   end
 
   test "should decrement down_votes" do
@@ -43,7 +43,7 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
    patch downvote_restaurant_path(@restaurant)
    @restaurant.reload
    assert_equal initial_downvote_value-1, @restaurant.down_vote
-   assert_redirected_to restaurants_path
+   assert_redirected_to new_user_session_url
   end
 
   test "should show restaurant" do
@@ -62,7 +62,5 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     
     assert_response :success 
   end
-
-  
   
 end
