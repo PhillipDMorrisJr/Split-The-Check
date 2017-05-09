@@ -21,4 +21,10 @@
   
 </p>
 
+<br>
+<h2><%= @restaurant.comments.count %> Comments</h2>
+	<%= render @restaurant.comments %>
+	<h3>Add a Comment:</h3>
+	<%= render 'comments/form' %>
+<br>
 <%= link_to 'Back', restaurants_path %>
