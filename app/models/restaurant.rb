@@ -12,11 +12,10 @@ class Restaurant < ApplicationRecord
         end
   	def upvote
          count = 0
-         @vote_histories.all.each do |vote|
+         vote_histories.each do |vote|
           if(vote.upvote)
-           up_vote = up_vote + 1
+           count = count + 1
           end
-	  return count
          end
          return count
 	end
@@ -24,11 +23,10 @@ class Restaurant < ApplicationRecord
   
   	def downvote
          count = 0
-         @vote_histories.all.each do |vote|
+         vote_histories.each do |vote|
           if(vote.upvote == false)
-           count = count - 1
+           count = count + 1
           end
-	  return count
          end
          return count
 	end

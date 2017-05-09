@@ -1,6 +1,6 @@
 class RestaurantsController < ApplicationController
     before_action :authenticate_user!, only: [:upvote, :downvote] 
-    before_action :set_restaurant, only: [:show]
+    before_action :set_restaurant, only: [:show, :upvote, :downvote]
 
    
   
@@ -48,15 +48,21 @@ class RestaurantsController < ApplicationController
 
   
   def upvote
-    @vote = VoteHistory.new(upvote_params)
-    @restaurant.save!
+    @vote = VoteHistory.new
+    @vote.restaurant = @restaurant
+    @vote.upvote = true
+    @vote.user_id = current_user.id
+    @vote.save!
     redirect_back(fallback_location: restaurants_path)
   end
 
   
   def downvote
-    @vote = VoteHistory.new(downvote_params)
-    @restaurant.save!
+    @vote = VoteHistory.new
+    @vote.restaurant = @restaurant
+    @vote.upvote = false
+    @vote.user_id = current_user.id
+    @vote.save!
     redirect_back(fallback_location: restaurants_path)
   end
 
@@ -95,9 +101,9 @@ class RestaurantsController < ApplicationController
       params.require(:restaurant).permit(:name, :location, :up_vote, :down_vote)
     end
     def upvote_params
-      params.permit(:user, :restaurant, true)
+      params.require(:id)
     end
     def downvote_params
-      params.permit(:user, :restaurant, false)
+      params.require(:id)
     end
 end
