@@ -46,14 +46,14 @@ class RestaurantsController < ApplicationController
 
   
   def upvote
-    @restaurant.up_vote = @restaurant.up_vote + 1
+    @vote = Vote.new(upvote_params)
     @restaurant.save!
     redirect_back(fallback_location: restaurants_path)
   end
 
   
   def downvote
-    @restaurant.down_vote = @restaurant.down_vote - 1
+    @vote = Vote.new(downvote_params)
     @restaurant.save!
     redirect_back(fallback_location: restaurants_path)
   end
@@ -91,5 +91,11 @@ class RestaurantsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def restaurant_params
       params.require(:restaurant).permit(:name, :location, :up_vote, :down_vote)
+    end
+    def upvote_params
+      params.require(:vote).permit(:user, :restaurant, true)
+    end
+    def downvote_params
+      params.require(:vote).permit(:user, :restaurant, false)
     end
 end
