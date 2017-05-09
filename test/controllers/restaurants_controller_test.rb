@@ -4,8 +4,11 @@ require 'test_helper'
 
 class RestaurantsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
+
   setup do
+
     @restaurant = restaurants(:one)
+
   end
 
   test "should get index" do
@@ -15,10 +18,8 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
-    @request.env['devise.mapping'] = Devise.mappings[:user]
-    sign_in users(:bob)
     get new_restaurant_url
-    assert_response :success
+    assert_redirected_to new_user_session_url
   end
 
   test "should create restaurant" do
@@ -63,8 +64,9 @@ test "should search restaurant by name" do
   end
 
   test "user should comment on restaurant" do 
-    sign_in users(:bob), scope: :admin
-    @comment = comment.create(:bob, "This is a test comment.")
+    
+    @restaurant.comments.create("This is a test comment.")
+    @comment.user = current_user
     @comment.save
     assert_redirected_to restaurant_path(@restaurant)
     
