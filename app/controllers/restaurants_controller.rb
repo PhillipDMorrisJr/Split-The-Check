@@ -9,6 +9,7 @@ class RestaurantsController < ApplicationController
   # GET /restaurants.json
   def index
     @restaurants = Restaurant.all
+    @vote = VoteHistory.all
     if params[:search]
       @restaurants = Restaurant.search(params[:search])
     end
@@ -22,6 +23,7 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/new
   def new
     @restaurant = Restaurant.new
+    @vote = VoteHistory.new
   end
 
   # GET /restaurants/1/edit
@@ -46,14 +48,14 @@ class RestaurantsController < ApplicationController
 
   
   def upvote
-    @vote = Vote.new(upvote_params)
+    @vote = VoteHistory.new(upvote_params)
     @restaurant.save!
     redirect_back(fallback_location: restaurants_path)
   end
 
   
   def downvote
-    @vote = Vote.new(downvote_params)
+    @vote = VoteHistory.new(downvote_params)
     @restaurant.save!
     redirect_back(fallback_location: restaurants_path)
   end
@@ -93,9 +95,9 @@ class RestaurantsController < ApplicationController
       params.require(:restaurant).permit(:name, :location, :up_vote, :down_vote)
     end
     def upvote_params
-      params.require(:vote).permit(:user, :restaurant, true)
+      params.permit(:user, :restaurant, true)
     end
     def downvote_params
-      params.require(:vote).permit(:user, :restaurant, false)
+      params.permit(:user, :restaurant, false)
     end
 end
