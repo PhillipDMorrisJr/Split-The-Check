@@ -1,5 +1,6 @@
 class RestaurantsController < ApplicationController
     before_action :authenticate_user!, only: [:upvote, :downvote] 
+    before_action :authenticate_user!, except: [:index, :show] 
     before_action :set_restaurant, only: [:show, :upvote, :downvote]
 
    
@@ -24,6 +25,7 @@ class RestaurantsController < ApplicationController
   def new
     @restaurant = Restaurant.new
     @vote = VoteHistory.new
+    @restaurant = current_user.restaurants.build
   end
 
   # GET /restaurants/1/edit
@@ -33,7 +35,7 @@ class RestaurantsController < ApplicationController
   # POST /restaurants
   # POST /restaurants.json
   def create
-    @restaurant = Restaurant.new(restaurant_params)
+    @restaurant = current_user.restaurants.build(restaurant_params)
 
     respond_to do |format|
       if @restaurant.save
@@ -54,6 +56,7 @@ class RestaurantsController < ApplicationController
     @vote.user_id = current_user.id
     @vote.save!
     redirect_back(fallback_location: restaurants_path)
+  
   end
 
   
@@ -64,6 +67,7 @@ class RestaurantsController < ApplicationController
     @vote.user_id = current_user.id
     @vote.save!
     redirect_back(fallback_location: restaurants_path)
+  
   end
 
   # PATCH/PUT /restaurants/1

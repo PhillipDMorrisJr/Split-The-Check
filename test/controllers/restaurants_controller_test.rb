@@ -1,18 +1,25 @@
 require 'test_helper'
 
+
+
 class RestaurantsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
+
     @restaurant = restaurants(:one)
+
   end
 
   test "should get index" do
+
     get restaurants_url
     assert_response :success
   end
 
   test "should get new" do
     get new_restaurant_url
-    assert_response :success
+    assert_redirected_to new_user_session_url
   end
 
   test "should create restaurant" do
@@ -28,7 +35,7 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
    patch upvote_restaurant_path(@restaurant)
    @restaurant.reload
    assert_equal initial_upvote_value+1, @restaurant.up_vote
-   assert_redirected_to restaurants_path
+   assert_redirected_to new_user_session_url
   end
 
   test "should decrement down_votes" do
@@ -36,14 +43,14 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
    patch downvote_restaurant_path(@restaurant)
    @restaurant.reload
    assert_equal initial_downvote_value-1, @restaurant.down_vote
-   assert_redirected_to restaurants_path
+   assert_redirected_to new_user_session_url
   end
 
   test "should show restaurant" do
     get restaurant_url(@restaurant)
     assert_response :success
   end
-test "should search restaurant by name" do 
+  test "should search restaurant by name" do 
     get restaurants_url , {search: "Ryans"}
 
 

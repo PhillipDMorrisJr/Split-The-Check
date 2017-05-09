@@ -12,13 +12,19 @@
 
 <p>
   <strong>  <%= link_to 'Up Vote', upvote_restaurant_path(@restaurant), method: 'patch' %>: </strong>
-  <%= @restaurant.up_vote %>
+  <%= @restaurant.upvote %>
 </p>
 
 <p>
   <strong><%= link_to 'Down Vote', downvote_restaurant_path(@restaurant), method: 'patch'%>: </strong>
-  <%= @restaurant.down_vote %>
+  <%= @restaurant.downvote %>
   
 </p>
 
+<br>
+<h2><%= @restaurant.comments.count %> Comments</h2>
+	<%= render @restaurant.comments %>
+	<h3>Add a Comment:</h3>
+	<%= render 'comments/form' %>
+<br>
 <%= link_to 'Back', restaurants_path %>

@@ -1,6 +1,7 @@
 class Restaurant < ApplicationRecord
 	belongs_to :user
         has_many :vote_histories
+	has_many :comments
 
 	def self.search(search)
 		where("name LIKE ? OR location LIKE ?", "%#{search}%", "%#{search}%")
