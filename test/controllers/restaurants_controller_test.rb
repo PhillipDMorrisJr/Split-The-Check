@@ -50,7 +50,7 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     get restaurant_url(@restaurant)
     assert_response :success
   end
-test "should search restaurant by name" do 
+  test "should search restaurant by name" do 
     get restaurants_url , {search: "Ryans"}
 
 
@@ -63,13 +63,6 @@ test "should search restaurant by name" do
     assert_response :success 
   end
 
-  test "user should comment on restaurant" do 
-    
-    @restaurant.comments.create("This is a test comment.")
-    @comment.user = current_user
-    @comment.save
-    assert_redirected_to restaurant_path(@restaurant)
-    
-  end
+  
   
 end

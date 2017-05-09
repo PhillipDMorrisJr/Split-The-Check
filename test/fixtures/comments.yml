@@ -11,3 +11,9 @@ two:
   body: MyText
   restaurant: two
   user: two
+
+three:
+  name: MyString
+  body: MyText
+  restaurant: three
+  user: csuser

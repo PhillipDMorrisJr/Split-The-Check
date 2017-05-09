@@ -28,13 +28,13 @@
         <td><%= restaurant.name %></td>
         <td><%= restaurant.location %></td>
         <td><%= link_to 'Show', restaurant %></td>
-        <% if restaurant.user == current_user %>
+        <% if user_signed_in? %>
         <td><%= restaurant.up_vote %></td>
         <td><%= restaurant.down_vote %></td>
         
 	<td><%= button_to 'Up Vote', upvote_restaurant_path(restaurant), method: 'patch' %></td>
 	<td><%= button_to 'Down Vote', downvote_restaurant_path(restaurant), method: 'patch'%></td>
-  <% end %>
+      <% end %>
       </tr>
     <% end %>  
   </tbody>
