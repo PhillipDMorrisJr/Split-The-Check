@@ -1,5 +1,5 @@
 class VoteHistory < ApplicationRecord
-	validates :user, :restaurant, :upvote presence: true
-	belongs_to :user, :restaurant
+	validates :user_id, :restaurant, presence: true
+	belongs_to :restaurant
 end
-end
+

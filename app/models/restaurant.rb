@@ -1,19 +1,19 @@
 class Restaurant < ApplicationRecord
-	
-	validates :name, :location presence: true
 	belongs_to :user
+        has_many :vote_histories
 
 	def self.search(search)
 		where("name LIKE ? OR location LIKE ?", "%#{search}%", "%#{search}%")
 	end
-
+        def new
+         @vote_histories = VoteHistory.new
+        end
   	def upvote
          count = 0
-         @vote_histories.each do |vote|
+         vote_histories.each do |vote|
           if(vote.upvote)
            count = count + 1
           end
-	  return count
          end
          return count
 	end
@@ -21,11 +21,10 @@ class Restaurant < ApplicationRecord
   
   	def downvote
          count = 0
-         @vote_histories.each do |vote|
+         vote_histories.each do |vote|
           if(vote.upvote == false)
-           count = count - 1
+           count = count + 1
           end
-	  return count
          end
          return count
 	end

@@ -1,6 +1,6 @@
 class RestaurantsController < ApplicationController
     before_action :authenticate_user!, only: [:upvote, :downvote] 
-    before_action :set_restaurant, only: [:show]
+    before_action :set_restaurant, only: [:show, :upvote, :downvote]
 
    
   
@@ -9,6 +9,7 @@ class RestaurantsController < ApplicationController
   # GET /restaurants.json
   def index
     @restaurants = Restaurant.all
+    @vote = VoteHistory.all
     if params[:search]
       @restaurants = Restaurant.search(params[:search])
     end
@@ -22,6 +23,7 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/new
   def new
     @restaurant = Restaurant.new
+    @vote = VoteHistory.new
   end
 
   # GET /restaurants/1/edit
@@ -46,15 +48,21 @@ class RestaurantsController < ApplicationController
 
   
   def upvote
-    @vote = Vote.new(upvote_params)
-    @restaurant.save!
+    @vote = VoteHistory.new
+    @vote.restaurant_id = @restaurant.id
+    @vote.upvote = true
+    @vote.user_id = current_user.id
+    @vote.save!
     redirect_back(fallback_location: restaurants_path)
   end
 
   
   def downvote
-    @vote = Vote.new(downvote_params)
-    @restaurant.save!
+    @vote = VoteHistory.new
+    @vote.restaurant_id = @restaurant.id
+    @vote.upvote = false
+    @vote.user_id = current_user.id
+    @vote.save!
     redirect_back(fallback_location: restaurants_path)
   end
 
@@ -93,9 +101,9 @@ class RestaurantsController < ApplicationController
       params.require(:restaurant).permit(:name, :location, :up_vote, :down_vote)
     end
     def upvote_params
-      params.require(:vote).permit(:user, :restaurant, true)
+      params.require(:id)
     end
     def downvote_params
-      params.require(:vote).permit(:user, :restaurant, false)
+      params.require(:id)
     end
 end
