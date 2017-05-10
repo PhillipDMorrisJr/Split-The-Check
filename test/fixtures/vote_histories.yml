@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user_id: 
-  restaurant: 
-  upvote: false
+  user_id: one.id
+  restaurant: one
+  upvote: true
 
 two:
-  user_id: 
-  restaurant: 
+  user_id: one.id
+  restaurant: one
   upvote: false

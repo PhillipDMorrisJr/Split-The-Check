@@ -8,7 +8,6 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
   setup do
 
     @restaurant = restaurants(:one)
-    @comment = comments(:one)
 
   end
 
@@ -27,25 +26,9 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Restaurant.count') do
       post restaurants_url, params: { restaurant: { location: @restaurant.location, name: @restaurant.name } }
     end
+    @restaurant.reload
 
     assert_redirected_to restaurant_url(Restaurant.last)
-  end
-
-  test "should increment up_votes" do
-   sign_in users(:one)
-   initial_upvote_value = @restaurant.up_vote
-   patch upvote_restaurant_path(@restaurant)
-   @restaurant.reload
-   assert_equal initial_upvote_value+1, @restaurant.up_vote
-   assert_redirected_to new_user_session_url
-  end
-
-  test "should decrement down_votes" do
-   initial_downvote_value = @restaurant.up_vote
-   patch downvote_restaurant_path(@restaurant)
-   @restaurant.reload
-   assert_equal initial_downvote_value-1, @restaurant.down_vote
-   assert_redirected_to new_user_session_url
   end
 
   test "should show restaurant" do
@@ -64,12 +47,13 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     
     assert_response :success 
   end
+
   test "user should comment on restaurant" do
  
    sign_in users(:one)
    initial_comment_value = @comment.body
    @comment.save
-   post comments_path, comment: {body: @comment.body, user: @comment.user}, restaurant_id: @restaurant.id
+   post comments_path_url, comment: {body: @comment.body, user: @comment.user}, restaurant_id: @restaurant.id
    assert_redirected_to restaurant_url(@restaurant)
   end
   

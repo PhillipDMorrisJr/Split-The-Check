@@ -3,14 +3,14 @@
 one:
   name: MyString
   location: MyString
-  up_vote: 1
-  down_vote: 0
 
 two:
   name: Papa Johns
   location: Carrollton
   up_vote: 1
   down_vote: 0
+  name: MyString
+  location: MyString
 
 
 
