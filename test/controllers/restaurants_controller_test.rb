@@ -8,6 +8,7 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
   setup do
 
     @restaurant = restaurants(:one)
+    @comment = comments(:one)
 
   end
 
@@ -24,7 +25,7 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create restaurant" do
     assert_difference('Restaurant.count') do
-      post restaurants_url, params: { restaurant: { down_vote: @restaurant.down_vote, location: @restaurant.location, name: @restaurant.name, up_vote: @restaurant.up_vote } }
+      post restaurants_url, params: { restaurant: { location: @restaurant.location, name: @restaurant.name } }
     end
 
     assert_redirected_to restaurant_url(Restaurant.last)
@@ -62,6 +63,14 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     get restaurants_url , {search: "Douglasville"}
     
     assert_response :success 
+  end
+  test "user should comment on restaurant" do
+ 
+   sign_in users(:one)
+   initial_comment_value = @comment.body
+   @comment.save
+   post comments_path, comment: {body: @comment.body, user: @comment.user}, restaurant_id: @restaurant.id
+   assert_redirected_to restaurant_url(@restaurant)
   end
   
 end

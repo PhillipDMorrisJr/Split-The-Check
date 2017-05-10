@@ -23,9 +23,8 @@ class RestaurantsController < ApplicationController
 
   # GET /restaurants/new
   def new
-    @restaurant = Restaurant.new
-    @vote = VoteHistory.new
     @restaurant = current_user.restaurants.build
+    @vote = VoteHistory.new
   end
 
   # GET /restaurants/1/edit

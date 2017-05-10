@@ -7,10 +7,12 @@ one:
   down_vote: 0
 
 two:
-  name: MyString
-  location: MyString
+  name: Papa Johns
+  location: Carrollton
   up_vote: 1
   down_vote: 0
+
+
 
 
 
