@@ -29,8 +29,6 @@
          <% if user_signed_in? %>
         <td><%= restaurant.upvote %></td>
         <td><%= restaurant.downvote %></td>
-       
-
 
 	<td><%= button_to 'Up Vote', upvote_restaurant_path(restaurant), method: 'patch' %></td>
 	<td><%= button_to 'Down Vote', downvote_restaurant_path(restaurant), method: 'patch'%></td>
