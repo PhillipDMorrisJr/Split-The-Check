@@ -102,7 +102,7 @@ class RestaurantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def restaurant_params
-      params.require(:restaurant).permit(:name, :location, :up_vote, :down_vote)
+      params.require(:restaurant).permit(:name, :location)
     end
     def upvote_params
       params.require(:id)
