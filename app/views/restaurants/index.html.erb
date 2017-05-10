@@ -21,21 +21,21 @@
       <h4> There are no restaurants that have that name or location <%= params[:search] %>.</h4>
       <% end %>
 
-
   <tbody>
     <% @restaurants.each do |restaurant| %>
       <tr>
         <td><%= restaurant.name %></td>
         <td><%= restaurant.location %></td>
+         <% if user_signed_in? %>
         <td><%= restaurant.upvote %></td>
         <td><%= restaurant.downvote %></td>
-        <td><%= link_to 'Show', restaurant %></td>
-        <% if user_signed_in? %>
-        <td><%= restaurant.up_vote %></td>
-        <td><%= restaurant.down_vote %></td>
+       
+
+
 	<td><%= button_to 'Up Vote', upvote_restaurant_path(restaurant), method: 'patch' %></td>
 	<td><%= button_to 'Down Vote', downvote_restaurant_path(restaurant), method: 'patch'%></td>
       <% end %>
+        <td><%= link_to 'Show', restaurant %></td>
       </tr>
     <% end %>  
   </tbody>
