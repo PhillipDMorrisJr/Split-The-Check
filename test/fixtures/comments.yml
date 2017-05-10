@@ -1,19 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
   body: MyText
   restaurant: one
   user: one
 
 two:
-  name: MyString
   body: MyText
   restaurant: two
   user: two
 
 three:
-  name: MyString
   body: MyText
   restaurant: three
   user: csuser

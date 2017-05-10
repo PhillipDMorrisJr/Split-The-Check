@@ -31,6 +31,7 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should increment up_votes" do
+   sign_in users(:one)
    initial_upvote_value = @restaurant.up_vote
    patch upvote_restaurant_path(@restaurant)
    @restaurant.reload
