@@ -1,16 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  body: MyText
-  restaurant: one
-  user: one
+  body: Comment
+  restaurant: Papa Johns
+  user: test1@test.com
 
 two:
   body: MyText
   restaurant: two
   user: two
 
-three:
-  body: MyText
-  restaurant: three
-  user: csuser
+

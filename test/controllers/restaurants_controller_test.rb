@@ -47,5 +47,14 @@ class RestaurantsControllerTest < ActionDispatch::IntegrationTest
     
     assert_response :success 
   end
+
+  test "user should comment on restaurant" do
+ 
+   sign_in users(:one)
+   initial_comment_value = @comment.body
+   @comment.save
+   post comments_path_url, comment: {body: @comment.body, user: @comment.user}, restaurant_id: @restaurant.id
+   assert_redirected_to restaurant_url(@restaurant)
+  end
   
 end
